@@ -37,6 +37,8 @@ wx/colour.h
 -
 wx/image.h
 -
+memory
+-
 string
 -
 chatbot.h
@@ -48,6 +50,8 @@ chatgui.h
 
 /home/workspace/CppND-Memory-Management-Chatbot/src/chatgui.h
 wx/wx.h
+-
+memory
 -
 
 /home/workspace/CppND-Memory-Management-Chatbot/src/chatlogic.cpp
@@ -81,12 +85,6 @@ string
 -
 chatgui.h
 /home/workspace/CppND-Memory-Management-Chatbot/src/chatgui.h
-
-/home/workspace/CppND-Memory-Management-Chatbot/src/graphedge.cpp
-graphnode.h
-/home/workspace/CppND-Memory-Management-Chatbot/src/graphnode.h
-graphedge.h
-/home/workspace/CppND-Memory-Management-Chatbot/src/graphedge.h
 
 /home/workspace/CppND-Memory-Management-Chatbot/src/graphedge.h
 vector
