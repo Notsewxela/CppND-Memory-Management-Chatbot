@@ -137,7 +137,8 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
-    delete _chatLogic;
+    // Not needed for std::unique_ptr as they delete themselves when reference is gone
+    // delete _chatLogic;
 
 
     ////
