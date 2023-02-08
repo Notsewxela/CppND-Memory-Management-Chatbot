@@ -8,6 +8,7 @@
 #include "graphedge.h"
 #include "chatbot.h"
 
+
 // constructor WITHOUT memory allocation
 ChatBot::ChatBot()
 {
@@ -44,6 +45,111 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+
+// I am a bit unsure of where we need to delete _image, so I have always done it...
+
+// Copy constructor
+ChatBot::ChatBot(const ChatBot &source)
+{
+    // Do I need to delete here?
+    if (_image != NULL) {
+        delete _image;
+        _image = NULL;
+    }
+
+    _image = new wxBitmap(source._image, wxBITMAP_TYPE_PNG));
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+
+}
+
+// (Copy) assignment operator
+ChatBot& ChatBot::operator=(const ChatBot &source)
+{
+    // Make sure we don't self assign!
+    if (this == &source)
+    {
+        return *this;
+    }
+    
+    // Delete current image if needed
+    if (_image != NULL) {
+        delete _image;
+        _image = NULL;
+    }
+
+    _image = new wxBitmap(source._image, wxBITMAP_TYPE_PNG);
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+
+    std::cout << "ChatBot (copy) assignment operator" << std::endl;
+
+    return *this;
+}
+
+// Move constructor
+ChatBot(ChatBot &&source)
+{
+    // Delete current image if needed
+    if (_image != NULL) {
+        delete _image;
+        _image = NULL;
+    }
+
+    _image = source._image;
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source.chatLogic;
+
+    if (source._image != NULL)
+    {
+        delete source._image;
+        source._image = NULL;
+    } 
+    source.SetRootNode(nullptr);
+    source.SetCurrentNode(nullptr);
+    source.SetChatLogicHandle(nullptr);
+
+    std::cout << "ChatBot move constructor" << std::endl;
+}
+
+// Move assgignment operator
+ChatBot& ChatBot::operator=(const ChatBot &&source)
+{
+    // Make sure we don't self assign!
+    if (this == &source)
+    {
+        return *this;
+    }
+
+    // Delete current image if needed
+    if (_image != NULL) {
+        delete _image;
+        _image = NULL;
+    }
+
+    _image = source._image;
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source.chatLogic;
+    
+    if (source._image != NULL)
+    {
+        delete source._image;
+        source._image = NULL;
+    }   
+    source.SetRootNode(nullptr);
+    source.SetCurrentNode(nullptr);
+    source.SetChatLogicHandle(nullptr);
+
+    std::cout << "ChatBot move assignment operator" << std::endl;
+
+    return *this;
+}
 
 ////
 //// EOF STUDENT CODE
