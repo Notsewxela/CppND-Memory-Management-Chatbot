@@ -96,7 +96,7 @@ ChatBot::ChatBot(ChatBot &&source)
 {
     // Delete current image if needed
     if (_image != NULL) {
-        delete _image;
+        // delete _image; // causes segmentation fault
         _image = NULL;
     }
 
@@ -104,13 +104,14 @@ ChatBot::ChatBot(ChatBot &&source)
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
+    //_chatLogic->SetChatbotHandle(this);
 
     if (source._image != NULL)
     {
         source._image = NULL;
     } 
     source.SetRootNode(nullptr);
-    source.SetCurrentNode(nullptr);
+    source._currentNode = nullptr;
     source.SetChatLogicHandle(nullptr);
 
     std::cout << "ChatBot move constructor" << std::endl;
@@ -135,13 +136,14 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     
     if (source._image != NULL)
     {
         source._image = NULL;
     }   
     source.SetRootNode(nullptr);
-    source.SetCurrentNode(nullptr);
+    source._currentNode = nullptr;
     source.SetChatLogicHandle(nullptr);
 
     std::cout << "ChatBot move assignment operator" << std::endl;
