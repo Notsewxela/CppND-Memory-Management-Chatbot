@@ -57,7 +57,7 @@ ChatBot::ChatBot(const ChatBot &source)
         _image = NULL;
     }
 
-    _image = new wxBitmap(source._image, wxBITMAP_TYPE_PNG));
+    _image = new wxBitmap(*source._image);
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
@@ -81,7 +81,7 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
         _image = NULL;
     }
 
-    _image = new wxBitmap(source._image, wxBITMAP_TYPE_PNG);
+    _image = new wxBitmap(*source._image);
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
@@ -92,7 +92,7 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
 }
 
 // Move constructor
-ChatBot(ChatBot &&source)
+ChatBot::ChatBot(ChatBot &&source)
 {
     // Delete current image if needed
     if (_image != NULL) {
@@ -103,11 +103,10 @@ ChatBot(ChatBot &&source)
     _image = source._image;
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
-    _chatLogic = source.chatLogic;
+    _chatLogic = source._chatLogic;
 
     if (source._image != NULL)
     {
-        delete source._image;
         source._image = NULL;
     } 
     source.SetRootNode(nullptr);
@@ -118,7 +117,7 @@ ChatBot(ChatBot &&source)
 }
 
 // Move assgignment operator
-ChatBot& ChatBot::operator=(const ChatBot &&source)
+ChatBot& ChatBot::operator=(ChatBot &&source)
 {
     // Make sure we don't self assign!
     if (this == &source)
@@ -135,11 +134,10 @@ ChatBot& ChatBot::operator=(const ChatBot &&source)
     _image = source._image;
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
-    _chatLogic = source.chatLogic;
+    _chatLogic = source._chatLogic;
     
     if (source._image != NULL)
     {
-        delete source._image;
         source._image = NULL;
     }   
     source.SetRootNode(nullptr);
