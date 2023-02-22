@@ -128,7 +128,7 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
 
     // Delete current image if needed
     if (_image != NULL) {
-        delete _image;
+        // delete _image;
         _image = NULL;
     }
 
